@@ -30,19 +30,6 @@ const campaigns = rawCampaigns as Campaign[]
 const campaign = [...campaigns].sort((a, b) => b.id.localeCompare(a.id))[0] as Campaign
 const estimated = campaign.phases.some((phase) => phase.certainty !== 'official')
 
-const month = new Intl.DateTimeFormat('fr-FR', { month: 'short', timeZone: campaign.timezone })
-const year = new Intl.DateTimeFormat('fr-FR', { year: '2-digit', timeZone: campaign.timezone })
-
-function period(start?: string, end?: string) {
-  if (!start || !end) return ''
-  const from = new Date(start)
-  const to = new Date(end)
-  const first = month.format(from).replace('.', '')
-  const last = month.format(to).replace('.', '')
-  const suffix = `${last} ${year.format(to)}`
-  return first === last ? suffix : `${first} – ${suffix}`
-}
-
 function font(file: string) {
   return pathToFileURL(fileURLToPath(new URL(file, FONTS))).href
 }
@@ -54,7 +41,6 @@ function template() {
       (phase) => `<li>
         <span class="num">${phase.order}</span>
         <span class="name">${SHORT_LABELS[phase.order] ?? phase.title}</span>
-        <span class="when">${period(phase.start, phase.end)}</span>
       </li>`,
     )
     .join('')
@@ -87,8 +73,7 @@ function template() {
   ol { display: flex; gap: 12px; list-style: none; }
   li { flex: 1; display: flex; flex-direction: column; gap: 6px; border-top: 4px solid #000091; padding-top: 14px; }
   .num { font-size: 20px; font-weight: 700; color: #000091; }
-  .name { font-size: 26px; font-weight: 700; }
-  .when { font-size: 20px; color: #666; }
+  .name { font-size: 28px; font-weight: 700; }
   .foot { display: flex; align-items: center; gap: 20px; margin-top: 26px; font-size: 20px; color: #666; }
   .badge { padding: 4px 12px; background: #feebd0; color: #7b3b00; font-size: 18px; font-weight: 700; text-transform: uppercase; }
 </style>
