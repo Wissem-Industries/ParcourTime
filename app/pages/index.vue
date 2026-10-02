@@ -68,14 +68,16 @@ useSeoMeta({
   ogImageWidth: 1200,
   ogImageHeight: 630,
   ogImageType: 'image/png',
-  ogImageAlt: () => `Calendrier Parcoursup ${selectedCampaign.value.id} : les phases de la campagne`,
+  ogImageAlt: () =>
+    `Calendrier Parcoursup ${selectedCampaign.value.id} : les phases de la campagne`,
   ogType: 'website',
   ogSiteName: 'ParcourTime',
   ogLocale: 'fr_FR',
   ogUrl: 'https://parcourtime.wissem.pro',
   twitterCard: 'summary_large_image',
   twitterTitle: () => `ParcourTime - ${selectedCampaign.value.label}`,
-  twitterDescription: () => `Compte à rebours et calendrier indicatif des phases Parcoursup pour ${selectedCampaign.value.label}.`,
+  twitterDescription: () =>
+    `Compte à rebours et calendrier indicatif des phases Parcoursup pour ${selectedCampaign.value.label}.`,
   twitterImage: socialImage,
 })
 </script>
